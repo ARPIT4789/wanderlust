@@ -5,7 +5,7 @@ WanderLust is a full-stack web application inspired by Airbnb that allows users 
 ---
 
 ## 🚀 Live Demo
-👉 https://your-render-app-url.onrender.com/listings
+👉 https://wanderlust-by-arpit.onrender.com/listings
 
 ---
 
