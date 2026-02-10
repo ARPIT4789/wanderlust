@@ -78,6 +78,19 @@ module.exports.listingShow = async (req, res) => {
         req.flash("error", "The requested listing does not exist");
         return res.redirect("/listings");                             // return
     }
+
+    if (!wanderLust.geometry || !Array.isArray(wanderLust.geometry.coordinates) || wanderLust.geometry.coordinates.length < 2) {
+        const geoResponse = await geocodingClient.forwardGeocode({
+            query: `${wanderLust.location}, ${wanderLust.country}`,
+            limit: 1
+        }).send();
+
+        const feature = geoResponse.body.features[0];
+        if (feature && feature.geometry) {
+            wanderLust.geometry = feature.geometry;
+            await wanderLust.save();
+        }
+    }
     res.render("lists/show.ejs", { wanderLust });
 }
 
